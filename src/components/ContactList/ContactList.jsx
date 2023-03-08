@@ -10,7 +10,7 @@ const ContactList = ({ contacts, onClick }) => (
           name={name}
           number={number}
           id={id}
-          onClick={onClick}
+          onClick={() => onClick(id)}
         />
       );
     })}

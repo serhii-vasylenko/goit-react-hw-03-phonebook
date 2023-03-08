@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import {Item, Button} from './ContactListItem.styled';
 
-const ContactList = ( {name, number, id , onClick }) => {
+const ContactList = ( {name, number , onClick }) => {
   return (
     <Item>
-      {name}: {number} <Button onClick={() => onClick(id)}>Delete</Button>
+      {name}: {number} <Button onClick={onClick}>Delete</Button>
     </Item>
   );
 };
