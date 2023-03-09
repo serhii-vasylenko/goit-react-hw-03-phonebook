@@ -4,8 +4,10 @@ import { nanoid } from 'nanoid';
 import ContactForm from 'components/ContactForm/ContactForm';
 import Filter from 'components/Filter/Filter';
 import ContactList from 'components/ContactList/ContactList';
+import Modal from "components/Modal/Modal";
 
 import { Container, MainTitle, SubTitle } from './Dashboard.styled';
+import {Button} from 'components/ContactList/ContactListItem.styled';
 
 class Dashboard extends Component {
   state = {
@@ -16,6 +18,7 @@ class Dashboard extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
+    showModal: false,
   };
 
   formSubmit = data => {
@@ -36,6 +39,8 @@ class Dashboard extends Component {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, contact],
     }));
+
+    this.toggleModal();
   };
 
   filterChange = evt => {
@@ -65,8 +70,12 @@ class Dashboard extends Component {
     }
   }
 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
+
   render() {
-    const { filter } = this.state;
+    const { filter, showModal } = this.state;
     const normalizedFilter = filter.toLowerCase();
     const filteredContacts = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
@@ -74,8 +83,11 @@ class Dashboard extends Component {
 
     return (
       <Container>
+        
         <MainTitle>Phonebook</MainTitle>
-        <ContactForm onSubmit={this.formSubmit} />
+        <Button type='button' onClick={this.toggleModal}>Add contact</Button>
+        {showModal && <Modal onClose={this.toggleModal}><ContactForm onSubmit={this.formSubmit} /></Modal>}
+        {/* <ContactForm onSubmit={this.formSubmit} /> */}
 
         <SubTitle>Contacts</SubTitle>
         <Filter value={filter} onChange={this.filterChange} />

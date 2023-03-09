@@ -7,7 +7,7 @@ export const Item = styled.li({
 });
 
 export const Button = styled.button({
-  width: '60px',
+  minWidth: '60px',
 
   backgroundColor: '#9d9d9d',
   color: '#fff',
