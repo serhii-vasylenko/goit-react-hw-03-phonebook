@@ -6,13 +6,29 @@ import { Backdrop, Content } from './Modal.styled';
 const modalRoot = document.querySelector('#modal-root');
 
 class Modal extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    window.addEventListener('keydown', this.habdleEscPress);
+  }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.habdleEscPress);
+  }
+
+  habdleEscPress = ({ code }) => {
+    if (code === 'Escape') {
+      this.props.onClose();
+    }
+  };
+
+  handleBackdropClick = ({currentTarget, target}) => {
+    if (currentTarget === target) {
+      this.props.onClose();
+    }
+  };
 
   render() {
     return createPortal(
-      <Backdrop>
+      <Backdrop onClick={this.handleBackdropClick}>
         <Content>{this.props.children}</Content>
       </Backdrop>,
       modalRoot

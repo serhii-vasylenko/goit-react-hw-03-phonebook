@@ -85,8 +85,8 @@ class Dashboard extends Component {
       <Container>
         
         <MainTitle>Phonebook</MainTitle>
-        <Button type='button' onClick={this.toggleModal}>Open modal</Button>
-        {showModal && <Modal><ContactForm onSubmit={this.formSubmit} /></Modal>}
+        <Button type='button' onClick={this.toggleModal}>Add contact</Button>
+        {showModal && <Modal onClose={this.toggleModal}><ContactForm onSubmit={this.formSubmit} /></Modal>}
         {/* <ContactForm onSubmit={this.formSubmit} /> */}
 
         <SubTitle>Contacts</SubTitle>
